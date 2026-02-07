@@ -42,7 +42,7 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20 lg:h-24">
+          <div className="flex justify-between items-center h-18 lg:h-20">
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
               <motion.img
@@ -50,7 +50,7 @@ const Navbar = () => {
                 transition={{ duration: 0.3 }}
                 src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770447536/Madhukunj-Logo_iccvy8.png"
                 alt="Madhukunj - Pure Veg"
-                className="h-12 lg:h-16 w-auto"
+                className="h-16 lg:h-20 w-80 object-contain"
               />
             </Link>
 

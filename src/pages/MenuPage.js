@@ -43,24 +43,26 @@ const MenuPage = () => {
       </section>
 
       {/* Filters */}
-      <section className="py-8 px-4 sticky top-20 bg-primary-dark/95 backdrop-blur-md z-40 shadow-lg">
+      <section className="py-8 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg">
         <div className="max-w-7xl mx-auto">
-          {/* Category Filters */}
-          <div className="flex flex-wrap gap-3 mb-4 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-5 py-2 rounded-sm font-body text-sm transition-all duration-300 ${
-                  selectedCategory === category
-                    ? 'bg-accent text-primary-dark shadow-lg shadow-accent/30'
-                    : 'bg-primary text-secondary/80 hover:bg-primary-light hover:text-secondary'
-                }`}
-                data-testid={`filter-${category}`}
-              >
-                {category === 'all' ? 'All Cuisines' : category}
-              </button>
-            ))}
+          {/* Category Filters - Single Line Scrollable */}
+          <div className="overflow-x-auto pb-4 mb-4 scrollbar-hide">
+            <div className="flex gap-3 min-w-max justify-start md:justify-center px-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-sm font-body text-sm whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
+                    selectedCategory === category
+                      ? 'bg-accent text-primary-dark shadow-lg shadow-accent/30'
+                      : 'bg-primary text-secondary/80 hover:bg-primary-light hover:text-secondary'
+                  }`}
+                  data-testid={`filter-${category}`}
+                >
+                  {category === 'all' ? 'All Dishes' : category}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Additional Filters */}

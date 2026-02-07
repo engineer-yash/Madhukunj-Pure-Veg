@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Upload, User, X } from 'lucide-react';
+import { Upload, User, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const GalleryPage = () => {
   return (
@@ -110,14 +110,83 @@ const RestaurantGallery = () => {
 
 const GuestMomentsSection = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [showAll, setShowAll] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
-  // Placeholder guest photos
-  const guestPhotos = [
-    'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443381/madhukunj.pune-20260207-0003_gqylj6.jpg',
-    'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/q8pj6rgu_madhukunj.pune-20260207-0001.jpg',
-    'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/adw7trha_madhukunj.pune-20260207-0002.jpg',
-    'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/9hwy4phx_madhukunj.pune-20260207-0004.jpg'
+  // Mock guest photos with user data (ready for backend integration)
+  const allGuestPhotos = [
+    {
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443381/madhukunj.pune-20260207-0003_gqylj6.jpg',
+      userName: 'Priya Sharma',
+      userAvatar: 'https://i.pravatar.cc/150?img=1'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/q8pj6rgu_madhukunj.pune-20260207-0001.jpg',
+      userName: 'Rajesh Kumar',
+      userAvatar: 'https://i.pravatar.cc/150?img=12'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/adw7trha_madhukunj.pune-20260207-0002.jpg',
+      userName: 'Anita Desai',
+      userAvatar: 'https://i.pravatar.cc/150?img=5'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/9hwy4phx_madhukunj.pune-20260207-0004.jpg',
+      userName: 'Vikram Patel',
+      userAvatar: 'https://i.pravatar.cc/150?img=13'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/2f88x19l_madhukunj.pune-20260207-0003.jpg',
+      userName: 'Sneha Reddy',
+      userAvatar: 'https://i.pravatar.cc/150?img=9'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/zxucu0pq_Madhukunj.png',
+      userName: 'Amit Joshi',
+      userAvatar: 'https://i.pravatar.cc/150?img=8'
+    },
+    {
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443381/madhukunj.pune-20260207-0003_gqylj6.jpg',
+      userName: 'Kavita Singh',
+      userAvatar: 'https://i.pravatar.cc/150?img=10'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/q8pj6rgu_madhukunj.pune-20260207-0001.jpg',
+      userName: 'Rohan Mehta',
+      userAvatar: 'https://i.pravatar.cc/150?img=11'
+    },
+    // Additional photos for "Load More"
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/adw7trha_madhukunj.pune-20260207-0002.jpg',
+      userName: 'Deepa Nair',
+      userAvatar: 'https://i.pravatar.cc/150?img=16'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/9hwy4phx_madhukunj.pune-20260207-0004.jpg',
+      userName: 'Sanjay Gupta',
+      userAvatar: 'https://i.pravatar.cc/150?img=14'
+    },
+    {
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443381/madhukunj.pune-20260207-0003_gqylj6.jpg',
+      userName: 'Meera Iyer',
+      userAvatar: 'https://i.pravatar.cc/150?img=20'
+    },
+    {
+      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/2f88x19l_madhukunj.pune-20260207-0003.jpg',
+      userName: 'Arjun Kapoor',
+      userAvatar: 'https://i.pravatar.cc/150?img=15'
+    }
   ];
+
+  const displayedPhotos = showAll ? allGuestPhotos : allGuestPhotos.slice(0, 8);
+
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prev) => (prev > 0 ? prev - 1 : allGuestPhotos.length - 1));
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prev) => (prev < allGuestPhotos.length - 1 ? prev + 1 : 0));
+  };
 
   return (
     <section ref={ref} className="py-16 px-4 bg-primary" data-testid="guest-moments">
@@ -138,24 +207,65 @@ const GuestMomentsSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {guestPhotos.map((photo, index) => (
+          {displayedPhotos.map((photo, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="aspect-square overflow-hidden rounded-sm shadow-lg"
+              transition={{ duration: 0.6, delay: index * 0.05 }}
+              className="relative aspect-square overflow-hidden rounded-sm shadow-lg group cursor-pointer"
+              onClick={() => setSelectedImageIndex(index)}
               data-testid={`guest-photo-${index}`}
             >
               <img
-                src={photo}
-                alt={`Guest moment ${index + 1}`}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                src={photo.url}
+                alt={`Guest moment by ${photo.userName}`}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              {/* User Info Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary-dark via-primary-dark/80 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center space-x-2">
+                  <img
+                    src={photo.userAvatar}
+                    alt={photo.userName}
+                    className="w-8 h-8 rounded-full border-2 border-accent"
+                  />
+                  <span className="font-body text-sm text-secondary">
+                    {photo.userName}
+                  </span>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Load More Button */}
+        {!showAll && allGuestPhotos.length > 8 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mt-12"
+          >
+            <button
+              onClick={() => setShowAll(true)}
+              className="px-8 py-3 bg-accent hover:bg-accent-dark text-primary-dark font-body font-medium rounded-sm transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
+              data-testid="load-more-btn"
+            >
+              Load More
+            </button>
+          </motion.div>
+        )}
       </div>
+
+      {/* Gallery Modal */}
+      <GalleryModal
+        photos={allGuestPhotos}
+        selectedIndex={selectedImageIndex}
+        onClose={() => setSelectedImageIndex(null)}
+        onPrev={handlePrevImage}
+        onNext={handleNextImage}
+      />
     </section>
   );
 };
@@ -308,6 +418,115 @@ const GuestUploadForm = () => {
         </motion.div>
       </div>
     </section>
+  );
+};
+
+// Gallery Modal Component with Navigation
+const GalleryModal = ({ photos, selectedIndex, onClose, onPrev, onNext }) => {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedIndex === null) return;
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'ArrowRight') onNext();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex, onClose, onPrev, onNext]);
+
+  if (selectedIndex === null) return null;
+
+  const currentPhoto = photos[selectedIndex];
+
+  return (
+    <AnimatePresence>
+      {selectedIndex !== null && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+          onClick={onClose}
+          data-testid="gallery-modal"
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="relative max-w-5xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute -top-12 right-0 text-secondary hover:text-accent transition-colors p-2 z-10"
+              data-testid="close-gallery-btn"
+              aria-label="Close gallery"
+            >
+              <X size={32} />
+            </button>
+
+            {/* Previous Button */}
+            <button
+              onClick={onPrev}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-primary-dark/80 hover:bg-accent text-secondary hover:text-primary-dark p-3 rounded-full transition-all duration-300 z-10"
+              data-testid="prev-image-btn"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={32} />
+            </button>
+
+            {/* Next Button */}
+            <button
+              onClick={onNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-primary-dark/80 hover:bg-accent text-secondary hover:text-primary-dark p-3 rounded-full transition-all duration-300 z-10"
+              data-testid="next-image-btn"
+              aria-label="Next image"
+            >
+              <ChevronRight size={32} />
+            </button>
+
+            {/* Image */}
+            <div className="relative">
+              <img
+                src={currentPhoto.url}
+                alt={`Photo by ${currentPhoto.userName}`}
+                className="w-full h-auto max-h-[80vh] object-contain rounded-sm shadow-2xl"
+              />
+              
+              {/* User Info */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary-dark via-primary-dark/90 to-transparent p-6 rounded-b-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src={currentPhoto.userAvatar}
+                      alt={currentPhoto.userName}
+                      className="w-12 h-12 rounded-full border-2 border-accent"
+                    />
+                    <div>
+                      <p className="font-body text-secondary font-medium">
+                        {currentPhoto.userName}
+                      </p>
+                      <p className="font-body text-secondary/70 text-sm">
+                        Guest at Madhukunj
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Image Counter */}
+                  <div className="font-body text-secondary/80 text-sm">
+                    {selectedIndex + 1} of {photos.length}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
