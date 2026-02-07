@@ -75,3 +75,13 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: #F5F3ED;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

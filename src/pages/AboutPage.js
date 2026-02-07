@@ -203,16 +203,19 @@ const PhilosophySection = () => {
             </h2>
             <div className="space-y-4 font-body text-lg text-secondary/90 leading-relaxed">
               <p>
-                <span className="text-accent font-semibold">Pure Vegetarian Excellence:</span> We believe vegetarian cuisine is not a limitation but an invitation to explore infinite flavors and possibilities.
+                <span className="text-accent font-semibold">Pure Vegetarian Excellence:</span> We believe vegetarian cuisine is not a limitation but an invitation to explore infinite flavors and possibilities across the globe.
               </p>
               <p>
-                <span className="text-accent font-semibold">Jain Sensitivity:</span> We honor Jain dietary principles with dedicated dishes, ensuring everyone finds comfort at our table.
+                <span className="text-accent font-semibold">World on Your Plate:</span> From the aromatic spices of <span className="text-accent">South Indian</span> cuisine to the exotic flavors of <span className="text-accent">Oriental</span> delights, from hearty <span className="text-accent">Indian Main Course</span> to refined <span className="text-accent">World Cuisine</span> - each category tells a story of culinary heritage and innovation.
               </p>
               <p>
-                <span className="text-accent font-semibold">Global yet Rooted:</span> While we explore cuisines from across the world - Italian pasta, Thai curries, Mexican delights - our heart remains anchored in Indian values of hospitality and purity.
+                <span className="text-accent font-semibold">Jain Sensitivity:</span> We honor Jain dietary principles with dedicated dishes across all categories, ensuring everyone finds comfort at our table.
               </p>
               <p>
-                <span className="text-accent font-semibold">Mindful Dining:</span> In a world of haste, we create spaces for slowness, for savoring each bite, for meaningful conversations.
+                <span className="text-accent font-semibold">Crafted with Care:</span> Whether you savor our handcrafted <span className="text-accent">Indian Breads</span>, aromatic <span className="text-accent">Rice & Biryani</span>, innovative <span className="text-accent">Continental Starters</span>, or divine <span className="text-accent">Desserts</span>, each dish embodies our commitment to quality and authenticity.
+              </p>
+              <p>
+                <span className="text-accent font-semibold">Mindful Dining:</span> In a world of haste, we create spaces for slowness, for savoring each bite, for meaningful conversations that transcend the meal itself.
               </p>
             </div>
           </motion.div>

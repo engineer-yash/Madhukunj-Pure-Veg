@@ -48,14 +48,14 @@ const ContactInfoSection = () => {
     {
       icon: <Phone size={28} />,
       title: 'Phone',
-      content: '+91 XXX XXX XXXX',
-      link: 'tel:+91XXXXXXXXXX'
+      content: '+91 9890004945',
+      link: 'tel:+919890004945'
     },
     {
-      icon: <Mail size={28} />,
-      title: 'Email',
-      content: 'hello@madhukunj.com',
-      link: 'mailto:hello@madhukunj.com'
+      icon: <Instagram size={28} />,
+      title: 'Instagram',
+      content: '@madhukunj.pune',
+      link: 'https://www.instagram.com/madhukunj.pune'
     },
     {
       icon: <Clock size={28} />,
@@ -282,7 +282,6 @@ const ContactFormSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center mt-12"
         >
-          <p className="font-body text-secondary/80 mb-4">Follow us on Instagram</p>
           <a
             href="https://www.instagram.com/madhukunj.pune"
             target="_blank"

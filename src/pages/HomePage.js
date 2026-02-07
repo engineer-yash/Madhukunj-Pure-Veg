@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import { ChefHat, Globe, UtensilsCrossed, Leaf, Heart, Sparkles, Droplet, Wheat } from 'lucide-react';
+import { ChefHat, Globe, UtensilsCrossed, Leaf, Heart, Sparkles, Droplet, Wheat, Instagram } from 'lucide-react';
 
 const HomePage = () => {
   return (
@@ -119,16 +119,16 @@ const HeroSection = () => {
 
       {/* Peacock Image on Right */}
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.7 }}
-        className="absolute right-0 bottom-0 h-[120%] w-auto hidden lg:block"
-        style={{ zIndex: 1 }}
+        className="absolute right-0 bottom-0 h-[60%] w-auto hidden lg:block pointer-events-none"
+        style={{ zIndex: 2 }}
       >
         <img
           src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770461383/IMG_20260207_153411-removebg-preview_qmhh55.png"
           alt="Peacock"
-          className="h-auto w-auto object-contain"
+          className="h-full w-auto object-contain"
           style={{ objectPosition: 'bottom right' }}
         />
       </motion.div>
@@ -642,10 +642,10 @@ const MadhukunjExperience = () => {
               At Madhukunj, dining transcends nourishment. It becomes a meditation, a celebration of life's simple pleasures elevated to art.
             </p>
             <p>
-              Our philosophy is rooted in <span className="text-accent font-medium">purity</span> of ingredients, of intention, of experience. Every dish honors the vegetarian tradition while embracing global flavors.
+              Our philosophy is rooted in <span className="text-accent font-medium">purity</span> of ingredients, of intention, of experience. Every dish honors the vegetarian tradition while embracing global flavors - from authentic <span className="text-accent font-medium">South Indian</span> delicacies to exotic <span className="text-accent font-medium">Oriental</span> creations, from classic <span className="text-accent font-medium">Indian Main Course</span> to refined <span className="text-accent font-medium">World Cuisine</span>.
             </p>
             <p>
-              We honor <span className="text-accent font-medium">Jain dietary principles</span>, ensuring every guest finds comfort and joy in our offerings.
+              We honor <span className="text-accent font-medium">Jain dietary principles</span>, ensuring every guest finds comfort and joy in our offerings. Whether you crave the smoky flavors from our <span className="text-accent font-medium">Tandoor</span>, handcrafted breads, aromatic biryanis, or divine desserts, each category is crafted with equal devotion.
             </p>
             <p>
               Here, meals are savored in tranquility. Conversations flow like gentle streams. Time slows, allowing you to truly taste, to truly be.
@@ -696,9 +696,15 @@ const InstagramWall = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-4">
-            @madhukunj.pune
-          </h2>
+          <a
+            href="https://www.instagram.com/madhukunj.pune"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary group-hover:text-accent transition-colors">
+              @madhukunj.pune
+            </h2>
+          </a>
           <p className="font-body text-lg text-secondary/80 mb-6">
             Follow us for daily inspiration
           </p>

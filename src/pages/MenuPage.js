@@ -10,6 +10,7 @@ const MenuPage = () => {
   const [filterSpicy, setFilterSpicy] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [visibleCountPerCategory, setVisibleCountPerCategory] = useState({});
 
   const allItems = getAllMenuItems();
 
@@ -21,6 +22,13 @@ const MenuPage = () => {
   });
 
   const categories = ['all', ...new Set(allItems.map((item) => item.category))];
+
+  const loadMoreItems = (categoryName) => {
+    setVisibleCountPerCategory((prev) => ({
+      ...prev,
+      [categoryName]: (prev[categoryName] || 8) + 8,
+    }));
+  };
 
   return (
     <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
@@ -43,39 +51,43 @@ const MenuPage = () => {
       </section>
 
       {/* Filters */}
-      <section className="py-8 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg">
+      <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-40">
         <div className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
-          <div className="overflow-x-auto pb-4 mb-4 scrollbar-hide">
-            <div className="flex gap-3 min-w-max justify-start md:justify-center px-2">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-sm font-body text-sm whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
-                    selectedCategory === category
-                      ? 'bg-accent text-primary-dark shadow-lg shadow-accent/30'
-                      : 'bg-primary text-secondary/80 hover:bg-primary-light hover:text-secondary'
-                  }`}
-                  data-testid={`filter-${category}`}
-                >
-                  {category === 'all' ? 'All Dishes' : category}
-                </button>
-              ))}
+          <div className="relative">
+            <div className="overflow-x-auto pb-2 mb-4 scrollbar-hide scroll-smooth">
+              <div className="flex gap-2 min-w-max justify-start md:justify-center px-2">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-3 py-2 rounded-sm font-body text-sm whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
+                      selectedCategory === category
+                        ? 'bg-accent text-primary-dark shadow-lg shadow-accent/30'
+                        : 'bg-primary text-secondary/80 hover:bg-primary-light hover:text-secondary'
+                    }`}
+                    data-testid={`filter-${category}`}
+                  >
+                    {category === 'all' ? 'All Dishes' : category}
+                  </button>
+                ))}
+              </div>
             </div>
+            {/* Scroll hint indicator */}
+            <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none md:hidden" />
           </div>
 
           {/* Additional Filters */}
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-3 justify-center">
             <label className="flex items-center space-x-2 cursor-pointer group">
               <input
                 type="checkbox"
                 checked={filterJain}
                 onChange={(e) => setFilterJain(e.target.checked)}
-                className="w-5 h-5 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
+                className="w-4 h-4 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
                 data-testid="filter-jain"
               />
-              <span className="font-body text-secondary/80 group-hover:text-accent transition-colors">
+              <span className="font-body text-sm text-secondary/80 group-hover:text-accent transition-colors">
                 Jain Only
               </span>
             </label>
@@ -85,11 +97,11 @@ const MenuPage = () => {
                 type="checkbox"
                 checked={filterSpicy}
                 onChange={(e) => setFilterSpicy(e.target.checked)}
-                className="w-5 h-5 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
+                className="w-4 h-4 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
                 data-testid="filter-spicy"
               />
-              <span className="font-body text-secondary/80 group-hover:text-accent transition-colors">
-                Spicy <Flame className="inline" size={16} />
+              <span className="font-body text-sm text-secondary/80 group-hover:text-accent transition-colors">
+                Spicy <Flame className="inline" size={14} />
               </span>
             </label>
           </div>
@@ -120,6 +132,10 @@ const MenuPage = () => {
                   );
                   if (categoryItems.length === 0) return null;
 
+                  const visibleCount = visibleCountPerCategory[categoryName] || 8;
+                  const displayedItems = categoryItems.slice(0, visibleCount);
+                  const hasMore = categoryItems.length > visibleCount;
+
                   return (
                     <div key={categoryName} data-testid={`category-${categoryName}`}>
                       {/* Category Header */}
@@ -137,7 +153,7 @@ const MenuPage = () => {
 
                       {/* Items Grid */}
                       <div className="space-y-6">
-                        {categoryItems.map((item, index) => (
+                        {displayedItems.map((item, index) => (
                           <MenuItem
                             key={item.id}
                             item={item}
@@ -147,6 +163,19 @@ const MenuPage = () => {
                           />
                         ))}
                       </div>
+
+                      {/* Load More Button */}
+                      {hasMore && (
+                        <div className="text-center mt-8">
+                          <button
+                            onClick={() => loadMoreItems(categoryName)}
+                            className="px-8 py-3 bg-accent hover:bg-accent-dark text-primary-dark font-body font-medium rounded-sm transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
+                            data-testid={`load-more-${categoryName}`}
+                          >
+                            Load More Items
+                          </button>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
@@ -171,14 +200,14 @@ const MenuItem = ({ item, index, inView, onImageClick }) => {
       className="bg-primary/40 backdrop-blur-sm rounded-sm border border-accent/20 overflow-hidden hover:border-accent/40 transition-all duration-500 group"
       data-testid={`menu-item-${item.id}`}
     >
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-row">
         {/* Content */}
-        <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
-          <div className="flex items-start justify-between mb-3">
+        <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center min-w-0">
+          <div className="flex items-start justify-between mb-3 flex-wrap gap-2">
             <h3 className="font-heading text-2xl lg:text-3xl text-secondary group-hover:text-accent transition-colors duration-300">
               {item.name}
             </h3>
-            <div className="flex items-center space-x-2 ml-4">
+            <div className="flex items-center space-x-2">
               {item.isJain && (
                 <span className="px-3 py-1 bg-accent/20 text-accent text-xs font-body rounded-sm border border-accent/40">
                   JAIN
@@ -209,9 +238,9 @@ const MenuItem = ({ item, index, inView, onImageClick }) => {
           </div>
         </div>
 
-        {/* Image */}
+        {/* Image - Fixed size, always on right side */}
         <div
-          className="md:w-64 lg:w-80 h-48 md:h-auto cursor-pointer overflow-hidden"
+          className="w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 flex-shrink-0 cursor-pointer overflow-hidden"
           onClick={onImageClick}
           data-testid={`menu-item-image-${item.id}`}
         >

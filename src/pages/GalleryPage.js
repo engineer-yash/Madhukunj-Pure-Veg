@@ -213,27 +213,27 @@ const GuestMomentsSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="relative aspect-square overflow-hidden rounded-sm shadow-lg group cursor-pointer"
+              className="relative group cursor-pointer"
               onClick={() => setSelectedImageIndex(index)}
               data-testid={`guest-photo-${index}`}
             >
-              <img
-                src={photo.url}
-                alt={`Guest moment by ${photo.userName}`}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              {/* User Info Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary-dark via-primary-dark/80 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="flex items-center space-x-2">
-                  <img
-                    src={photo.userAvatar}
-                    alt={photo.userName}
-                    className="w-8 h-8 rounded-full border-2 border-accent"
-                  />
-                  <span className="font-body text-sm text-secondary">
-                    {photo.userName}
-                  </span>
-                </div>
+              <div className="aspect-square overflow-hidden rounded-sm shadow-lg">
+                <img
+                  src={photo.url}
+                  alt={`Guest moment by ${photo.userName}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              {/* User Info - Always Visible Below Image */}
+              <div className="mt-2 flex items-center space-x-2">
+                <img
+                  src={photo.userAvatar}
+                  alt={photo.userName}
+                  className="w-8 h-8 rounded-full border-2 border-accent"
+                />
+                <span className="font-body text-sm text-secondary">
+                  {photo.userName}
+                </span>
               </div>
             </motion.div>
           ))}
@@ -325,7 +325,7 @@ const GuestUploadForm = () => {
 
             <div>
               <label className="block font-body text-secondary mb-2">
-                Profile Picture
+                Profile Picture <span className="text-secondary/60 text-sm">(Optional)</span>
               </label>
               <div className="flex items-center space-x-4">
                 <div className="flex-shrink-0 w-20 h-20 bg-primary-dark rounded-full border-2 border-accent/30 flex items-center justify-center overflow-hidden">
