@@ -67,7 +67,6 @@ const HeroSection = () => {
             ref={videoRef}
             autoPlay
             playsInline
-            muted
             className="absolute inset-0 w-full h-full object-cover"
             data-testid="hero-video"
           >
