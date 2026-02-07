@@ -65,6 +65,7 @@ const HeroSection = () => {
         {!videoEnded ? (
           <video
             ref={videoRef}
+            muted
             autoPlay
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
