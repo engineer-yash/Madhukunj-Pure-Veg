@@ -78,8 +78,8 @@ const BrandStorySection = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-accent/30 rounded-sm -z-10" />
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-accent/10 backdrop-blur-sm rounded-sm -z-10" />
+            {/* <div className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-accent/30 rounded-sm -z-10" />
+            <div className="absolute -top-6 -right-6 w-24 h-24 bg-accent/10 backdrop-blur-sm rounded-sm -z-10" /> */}
           </motion.div>
         </div>
       </div>
