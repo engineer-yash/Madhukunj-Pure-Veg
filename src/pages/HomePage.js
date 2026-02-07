@@ -128,7 +128,7 @@ const HeroSection = () => {
         <img
           src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770461383/IMG_20260207_153411-removebg-preview_qmhh55.png"
           alt="Peacock"
-          className="h-full w-auto object-contain"
+          className="h-auto w-auto object-contain"
           style={{ objectPosition: 'bottom right' }}
         />
       </motion.div>
