@@ -102,16 +102,26 @@ const Footer = () => {
                   <div>+91 9890004946</div>
                 </div>
               </a>
-              <div className="flex items-start space-x-2 text-secondary/70">
+              
+              <a 
+                  href="https://maps.app.goo.gl/epsXLCbvQt4m26vm8"
+                  className="flex items-start space-x-2 text-secondary/70 hover:text-accent transition-colors group"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="footer-address"
+              >
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
-                <p className="font-body text-sm leading-relaxed">
+                <div className = "font-body text-sm">
+                <div className="text-secondary/50 text-xs">Address</div>
+                <p className="leading-relaxed">
                   Shivneri Path, Below Hotel Nandanvan,
                   <br />
                   Adarsh Nagar Society, Parsanees Colony,
                   <br />
-                  Giltekadi, Pune, Maharashtra, 411037
+                  Gultekadi, Pune, Maharashtra, 411037
                 </p>
-              </div>
+                </div>
+              </a>
             </div>
           </motion.div>
 
@@ -125,7 +135,7 @@ const Footer = () => {
             <h3 className="font-heading text-xl text-secondary mb-4">Find Us</h3>
             <div className="rounded-sm overflow-hidden border border-accent/20">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.6177564647845!2d73.87991347516586!3d18.49603418257911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1c8c8c8c8c9%3A0x1c8c8c8c8c8c8c8!2sShivneri%20Path%2C%20Pune!5e1!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin&maptype=satellite"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3148.296065191748!2d73.8631632!3d18.4896568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1f16795de19%3A0x6b4bfbb60cb7271!2sMadhukunj%20Pure%20Veg!5e1!3m2!1sen!2sin!4v1770470203542!5m2!1sen!2sin"
                 width="100%"
                 height="200"
                 style={{ border: 0 }}

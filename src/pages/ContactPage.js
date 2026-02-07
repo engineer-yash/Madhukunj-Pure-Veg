@@ -129,7 +129,7 @@ const MapSection = () => {
           className="rounded-sm overflow-hidden shadow-2xl shadow-accent/20 border border-accent/20"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.3746936186894!2d73.85674!3d18.52043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMxJzEzLjYiTiA3M8KwNTEnMjQuMyJF!5e0!3m2!1sen!2sin!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3148.296065191748!2d73.8631632!3d18.4896568!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1f16795de19%3A0x6b4bfbb60cb7271!2sMadhukunj%20Pure%20Veg!5e1!3m2!1sen!2sin!4v1770470203542!5m2!1sen!2sin"
             width="100%"
             height="500"
             style={{ border: 0 }}
