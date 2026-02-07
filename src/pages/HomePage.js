@@ -72,13 +72,13 @@ const HeroSection = () => {
             data-testid="hero-video"
           >
             <source
-              src="https://res.cloudinary.com/dkinrfyq7/video/upload/v1770447497/Madhukunj-Video_lufxp4.mp4"
+              src="https://res.cloudinary.com/dkinrfyq7/video/upload/v1770476188/Madhukunj-Video_nu5p46.mp4"
               type="video/mp4"
             />
           </video>
         ) : (
           <img
-            src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770462956/hero_section_zr5uja.png"
+            src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770476539/hero_section_1_2_eiu4ev.png"
             alt="Madhukunj Hero"
             className="absolute inset-0 w-full h-full object-cover"
             data-testid="hero-static-image"

@@ -26,7 +26,7 @@ const Footer = () => {
           >
             <Link to="/" className="inline-block mb-4">
               <img
-                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770473095/Gemini_Generated_Image_ngj8y9ngj8y9ngj8-ai-brush-removebg-ow5nx29_ywhzsh.png"
+                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770476273/Madhukunj_zpiozn.png"
                 alt="Madhukunj - Pure Veg"
                 className="h-16 w-auto"
               />
