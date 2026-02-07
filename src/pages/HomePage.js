@@ -104,8 +104,8 @@ const HeroSection = () => {
 
       {/* Left Overlay Design */}
       <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.5 }}
         className="absolute left-0 top-0 h-full w-1/4 hidden lg:block"
         style={{ zIndex: 1 }}
@@ -119,8 +119,8 @@ const HeroSection = () => {
 
       {/* Peacock Image on Right */}
       <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.7 }}
         className="absolute right-0 bottom-0 h-[120%] w-auto hidden lg:block"
         style={{ zIndex: 1 }}
@@ -150,7 +150,7 @@ const HeroSection = () => {
           >
             Where Taste Meets Tradition
             <br />
-            <span className="text-accent">Pure Vegetarian.</span>
+            <span className="text-accent">Pure Vegetarian</span>
           </motion.h1>
 
           <motion.p
@@ -162,7 +162,7 @@ const HeroSection = () => {
           >
             Bringing you the finest vegetarian flavors,
             <br />
-            one plate at a time.
+            one plate at a time
           </motion.p>
 
           <motion.div
@@ -373,7 +373,7 @@ const KitchenPhilosophy = () => {
           </p>
 
           <p className="font-body text-lg text-secondary/80 leading-relaxed max-w-3xl mx-auto">
-            Every dish at Madhukunj begins with intention — pure ingredients, mindful cooking, 
+            Every dish at Madhukunj begins with intention - pure ingredients, mindful cooking, 
             and flavors that respect tradition while embracing the world. We believe in the power 
             of food to nourish not just the body, but the soul.
           </p>
@@ -411,8 +411,8 @@ const JainConsciousDining = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: -40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6"
           >
@@ -438,8 +438,8 @@ const JainConsciousDining = () => {
 
           {/* Right: Icons/Features */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-8"
           >
@@ -594,8 +594,8 @@ const SignatureCreations = () => {
           {signatures.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: index % 2 === 0 ? -40 : 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="bg-primary/40 backdrop-blur-sm p-8 lg:p-10 rounded-sm border border-accent/20 hover:border-accent/40 transition-all duration-500"
               data-testid={`signature-item-${index}`}
@@ -642,7 +642,7 @@ const MadhukunjExperience = () => {
               At Madhukunj, dining transcends nourishment. It becomes a meditation, a celebration of life's simple pleasures elevated to art.
             </p>
             <p>
-              Our philosophy is rooted in <span className="text-accent font-medium">purity</span> — of ingredients, of intention, of experience. Every dish honors the vegetarian tradition while embracing global flavors.
+              Our philosophy is rooted in <span className="text-accent font-medium">purity</span> of ingredients, of intention, of experience. Every dish honors the vegetarian tradition while embracing global flavors.
             </p>
             <p>
               We honor <span className="text-accent font-medium">Jain dietary principles</span>, ensuring every guest finds comfort and joy in our offerings.

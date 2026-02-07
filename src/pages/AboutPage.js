@@ -44,8 +44,8 @@ const BrandStorySection = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: -40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
@@ -57,7 +57,7 @@ const BrandStorySection = () => {
                 Madhukunj was born from a simple yet profound vision: to create a sanctuary where pure vegetarian cuisine transcends borders, where Indian soul meets global sophistication.
               </p>
               <p>
-                Our name, <span className="text-accent font-medium">Madhukunj</span> — 'the garden of sweetness' — evokes the sacred groves of Vrindavan, where Lord Krishna played his divine flute, bringing joy and serenity to all beings.
+                Our name, <span className="text-accent font-medium">Madhukunj</span> 'the garden of sweetness' evokes the sacred groves of Vrindavan, where Lord Krishna played his divine flute, bringing joy and serenity to all beings.
               </p>
               <p>
                 Just as those ancient gardens were spaces of pure bliss, our restaurant aspires to be a modern-day sanctuary where every guest experiences tranquility, nourishment, and joy.
@@ -66,8 +66,8 @@ const BrandStorySection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
@@ -169,8 +169,8 @@ const PhilosophySection = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: -40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="relative order-2 lg:order-1"
           >
@@ -193,8 +193,8 @@ const PhilosophySection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6 order-1 lg:order-2"
           >
@@ -209,7 +209,7 @@ const PhilosophySection = () => {
                 <span className="text-accent font-semibold">Jain Sensitivity:</span> We honor Jain dietary principles with dedicated dishes, ensuring everyone finds comfort at our table.
               </p>
               <p>
-                <span className="text-accent font-semibold">Global yet Rooted:</span> While we explore cuisines from across the world — Italian pasta, Thai curries, Mexican delights — our heart remains anchored in Indian values of hospitality and purity.
+                <span className="text-accent font-semibold">Global yet Rooted:</span> While we explore cuisines from across the world - Italian pasta, Thai curries, Mexican delights - our heart remains anchored in Indian values of hospitality and purity.
               </p>
               <p>
                 <span className="text-accent font-semibold">Mindful Dining:</span> In a world of haste, we create spaces for slowness, for savoring each bite, for meaningful conversations.

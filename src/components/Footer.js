@@ -26,7 +26,7 @@ const Footer = () => {
           >
             <Link to="/" className="inline-block mb-4">
               <img
-                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770447536/Madhukunj-Logo_iccvy8.png"
+                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770473095/Gemini_Generated_Image_ngj8y9ngj8y9ngj8-ai-brush-removebg-ow5nx29_ywhzsh.png"
                 alt="Madhukunj - Pure Veg"
                 className="h-16 w-auto"
               />
@@ -34,7 +34,7 @@ const Footer = () => {
             <p className="text-secondary/80 font-body text-sm leading-relaxed mb-4">
               Where Taste Meets Tradition 🌿
               <br />
-              Bringing you the finest vegetarian flavors, one plate at a time.
+              Bringing you the finest vegetarian flavors, one plate at a time
             </p>
             <a
               href="https://www.instagram.com/madhukunj.pune"
@@ -161,7 +161,7 @@ const Footer = () => {
           className="text-center"
         >
           <p className="text-secondary/60 text-sm font-body">
-            © {new Date().getFullYear()} Madhukunj. All rights reserved. Crafted with love for pure vegetarian excellence.
+            © {new Date().getFullYear()} Madhukunj. All rights reserved. Crafted with ❤ for pure vegetarian excellence.
           </p>
         </motion.div>
       </div>

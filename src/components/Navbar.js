@@ -48,9 +48,9 @@ const Navbar = () => {
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
-                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770447536/Madhukunj-Logo_iccvy8.png"
+                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770473095/Gemini_Generated_Image_ngj8y9ngj8y9ngj8-ai-brush-removebg-ow5nx29_ywhzsh.png"
                 alt="Madhukunj - Pure Veg"
-                className="h-16 lg:h-20 w-80 object-contain"
+                className="h-16 lg:h-20 w-auto object-contain"
               />
             </Link>
 
@@ -97,9 +97,9 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
+            initial={{ opacity: 0, y: '100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="fixed inset-y-0 right-0 z-40 w-64 bg-primary shadow-2xl md:hidden"
             data-testid="mobile-menu"
@@ -108,8 +108,8 @@ const Navbar = () => {
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.path}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
                   <Link
