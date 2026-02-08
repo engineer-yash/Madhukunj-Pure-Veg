@@ -701,7 +701,7 @@ const InstagramWall = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-4 hover:text-accent transition-colors duration-300">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-4">
               @madhukunj.pune
             </h2>
           </a>
