@@ -12,10 +12,18 @@ const Footer = () => {
     { name: 'Contact', path: '/contact' }
   ];
 
+  const menuCategories = [
+    { name: 'South Indian', path: '/menu' },
+    { name: 'Indian Main Course', path: '/menu' },
+    { name: 'Tandoor', path: '/menu' },
+    { name: 'Oriental', path: '/menu' },
+    { name: 'Desserts', path: '/menu' }
+  ];
+
   return (
     <footer className="bg-primary-dark py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Logo & Tagline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -71,11 +79,34 @@ const Footer = () => {
             </ul>
           </motion.div>
 
+          {/* Menu Categories */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="font-heading text-xl text-secondary mb-4">Explore Menu</h3>
+            <ul className="space-y-2">
+              {menuCategories.map((category) => (
+                <li key={category.name}>
+                  <Link
+                    to={category.path}
+                    className="text-secondary/70 hover:text-accent transition-colors font-body text-sm"
+                    data-testid={`footer-category-${category.name.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
             viewport={{ once: true }}
           >
             <h3 className="font-heading text-xl text-secondary mb-4">Contact Us</h3>

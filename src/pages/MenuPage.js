@@ -10,7 +10,7 @@ const MenuPage = () => {
   const [filterSpicy, setFilterSpicy] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [visibleCountPerCategory, setVisibleCountPerCategory] = useState({});
+  const [visibleCountPerCategory, setVisibleCountPerCategory] = useState({ all: 8 });
 
   const allItems = getAllMenuItems();
 
@@ -30,6 +30,12 @@ const MenuPage = () => {
     }));
   };
 
+  // Scroll to top when category changes
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
       {/* Hero Section */}
@@ -44,14 +50,14 @@ const MenuPage = () => {
             Our Menu
           </h1>
           <p className="font-body text-lg text-secondary/80 max-w-2xl mx-auto">
-            A curated selection of global cuisines, thoughtfully prepared with pure vegetarian ingredients
+            Authentic vegetarian dishes crafted from the finest ingredients across diverse culinary traditions
           </p>
           <div className="w-24 h-1 bg-accent mx-auto mt-8" />
         </motion.div>
       </section>
 
       {/* Filters */}
-      <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-40">
+      <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-30">
         <div className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
           <div className="relative">
@@ -60,7 +66,7 @@ const MenuPage = () => {
                 {categories.map((category) => (
                   <button
                     key={category}
-                    onClick={() => setSelectedCategory(category)}
+                    onClick={() => handleCategoryChange(category)}
                     className={`px-3 py-2 rounded-sm font-body text-sm whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
                       selectedCategory === category
                         ? 'bg-accent text-primary-dark shadow-lg shadow-accent/30'
@@ -123,62 +129,106 @@ const MenuPage = () => {
             </motion.div>
           ) : (
             <div className="space-y-16">
-              {/* Group by category */}
-              {categories
-                .filter((cat) => cat !== 'all')
-                .map((categoryName) => {
-                  const categoryItems = filteredItems.filter(
-                    (item) => item.category === categoryName
-                  );
-                  if (categoryItems.length === 0) return null;
+              {/* If "All Dishes" is selected, show all items together */}
+              {selectedCategory === 'all' ? (
+                <div data-testid="category-all">
+                  {/* Category Header */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6 }}
+                    className="mb-8"
+                  >
+                    <h2 className="font-heading text-4xl lg:text-5xl text-accent mb-2">
+                      All Dishes
+                    </h2>
+                    <div className="w-16 h-0.5 bg-accent/50" />
+                  </motion.div>
 
-                  const visibleCount = visibleCountPerCategory[categoryName] || 8;
-                  const displayedItems = categoryItems.slice(0, visibleCount);
-                  const hasMore = categoryItems.length > visibleCount;
+                  {/* Items Grid */}
+                  <div className="space-y-6">
+                    {filteredItems.slice(0, visibleCountPerCategory['all'] || 8).map((item, index) => (
+                      <MenuItem
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        inView={inView}
+                        onImageClick={() => setSelectedImage(item.image)}
+                      />
+                    ))}
+                  </div>
 
-                  return (
-                    <div key={categoryName} data-testid={`category-${categoryName}`}>
-                      {/* Category Header */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.6 }}
-                        className="mb-8"
+                  {/* Load More Button */}
+                  {filteredItems.length > (visibleCountPerCategory['all'] || 8) && (
+                    <div className="text-center mt-8">
+                      <button
+                        onClick={() => loadMoreItems('all')}
+                        className="px-8 py-3 bg-accent hover:bg-accent-dark text-primary-dark font-body font-medium rounded-sm transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
+                        data-testid="load-more-all"
                       >
-                        <h2 className="font-heading text-4xl lg:text-5xl text-accent mb-2">
-                          {categoryName}
-                        </h2>
-                        <div className="w-16 h-0.5 bg-accent/50" />
-                      </motion.div>
-
-                      {/* Items Grid */}
-                      <div className="space-y-6">
-                        {displayedItems.map((item, index) => (
-                          <MenuItem
-                            key={item.id}
-                            item={item}
-                            index={index}
-                            inView={inView}
-                            onImageClick={() => setSelectedImage(item.image)}
-                          />
-                        ))}
-                      </div>
-
-                      {/* Load More Button */}
-                      {hasMore && (
-                        <div className="text-center mt-8">
-                          <button
-                            onClick={() => loadMoreItems(categoryName)}
-                            className="px-8 py-3 bg-accent hover:bg-accent-dark text-primary-dark font-body font-medium rounded-sm transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
-                            data-testid={`load-more-${categoryName}`}
-                          >
-                            Load More Items
-                          </button>
-                        </div>
-                      )}
+                        Load More Items
+                      </button>
                     </div>
-                  );
-                })}
+                  )}
+                </div>
+              ) : (
+                /* Group by category for specific category selection */
+                categories
+                  .filter((cat) => cat !== 'all')
+                  .map((categoryName) => {
+                    const categoryItems = filteredItems.filter(
+                      (item) => item.category === categoryName
+                    );
+                    if (categoryItems.length === 0) return null;
+
+                    const visibleCount = visibleCountPerCategory[categoryName] || 8;
+                    const displayedItems = categoryItems.slice(0, visibleCount);
+                    const hasMore = categoryItems.length > visibleCount;
+
+                    return (
+                      <div key={categoryName} data-testid={`category-${categoryName}`}>
+                        {/* Category Header */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={inView ? { opacity: 1, y: 0 } : {}}
+                          transition={{ duration: 0.6 }}
+                          className="mb-8"
+                        >
+                          <h2 className="font-heading text-4xl lg:text-5xl text-accent mb-2">
+                            {categoryName}
+                          </h2>
+                          <div className="w-16 h-0.5 bg-accent/50" />
+                        </motion.div>
+
+                        {/* Items Grid */}
+                        <div className="space-y-6">
+                          {displayedItems.map((item, index) => (
+                            <MenuItem
+                              key={item.id}
+                              item={item}
+                              index={index}
+                              inView={inView}
+                              onImageClick={() => setSelectedImage(item.image)}
+                            />
+                          ))}
+                        </div>
+
+                        {/* Load More Button */}
+                        {hasMore && (
+                          <div className="text-center mt-8">
+                            <button
+                              onClick={() => loadMoreItems(categoryName)}
+                              className="px-8 py-3 bg-accent hover:bg-accent-dark text-primary-dark font-body font-medium rounded-sm transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
+                              data-testid={`load-more-${categoryName}`}
+                            >
+                              Load More Items
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+              )}
             </div>
           )}
         </div>

@@ -29,7 +29,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 800);
+      setIsMobile(window.innerWidth < 650);
     };
 
     checkMobile();
