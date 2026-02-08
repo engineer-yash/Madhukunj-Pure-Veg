@@ -40,7 +40,7 @@ const MenuPage = () => {
     };
 
   return (
-    <div id="filters-section" className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
+    <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
       {/* Hero Section */}
       <section className="py-16 px-4 bg-primary">
         <motion.div
@@ -61,7 +61,7 @@ const MenuPage = () => {
 
       {/* Filters */}
       <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-30">
-        <div className="max-w-7xl mx-auto">
+        <div id="filters-section" className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
           <div className="relative">
             <div className="overflow-x-auto pb-2 mb-4 scrollbar-hide scroll-smooth">
