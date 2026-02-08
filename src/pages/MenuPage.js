@@ -40,7 +40,7 @@ const MenuPage = () => {
     };
 
   return (
-    <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
+    <div id="filters-section" className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
       {/* Hero Section */}
       <section className="py-16 px-4 bg-primary">
         <motion.div
@@ -189,7 +189,7 @@ const MenuPage = () => {
                     const hasMore = categoryItems.length > visibleCount;
 
                     return (
-                      <div id="filters-section" key={categoryName} data-testid={`category-${categoryName}`}>
+                      <div key={categoryName} data-testid={`category-${categoryName}`}>
                         {/* Category Header */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
