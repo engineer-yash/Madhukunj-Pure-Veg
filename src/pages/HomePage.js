@@ -665,8 +665,6 @@ const MadhukunjExperience = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* Decorative Element */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-accent/30 rounded-sm -z-10" />
           </motion.div>
         </motion.div>
       </div>
@@ -701,7 +699,7 @@ const InstagramWall = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-4">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-4 group-hover:text-accent">
               @madhukunj.pune
             </h2>
           </a>
