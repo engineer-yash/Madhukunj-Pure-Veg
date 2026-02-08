@@ -42,7 +42,7 @@ const ContactInfoSection = () => {
     {
       icon: <MapPin size={28} />,
       title: 'Location',
-      content: 'Pune, Maharashtra, India',
+      content: 'Shivneri Path, Below Hotel Nandanvan,\n Adarsh Nagar Society, Parsanees Colony,\n Gultekadi, Pune, Maharashtra, 411037',
       link: 'https://maps.app.goo.gl/jvxPXw5eJUa59d7w5'
     },
     {
@@ -60,7 +60,7 @@ const ContactInfoSection = () => {
     {
       icon: <Clock size={28} />,
       title: 'Hours',
-      content: 'Daily: 11:00 AM - 11:00 PM',
+      content: 'Daily: 8:00 AM - 12:00 AM',
       link: null
     }
   ];
@@ -274,24 +274,6 @@ const ContactFormSection = () => {
               Send Message
             </button>
           </form>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-12"
-        >
-          <a
-            href="https://www.instagram.com/madhukunj.pune"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 text-accent hover:text-accent-light transition-colors"
-            data-testid="instagram-link"
-          >
-            <Instagram size={24} />
-            <span className="font-body font-medium">@madhukunj.pune</span>
-          </a>
         </motion.div>
       </div>
     </section>

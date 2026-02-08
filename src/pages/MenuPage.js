@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { X, Flame } from 'lucide-react';
@@ -9,30 +9,59 @@ const MenuPage = () => {
   const [filterJain, setFilterJain] = useState(false);
   const [filterSpicy, setFilterSpicy] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [visibleCountPerCategory, setVisibleCountPerCategory] = useState({});
+
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const topRef = useRef(null);
 
   const allItems = getAllMenuItems();
 
-  const filteredItems = allItems.filter((item) => {
-    if (selectedCategory !== 'all' && item.category !== selectedCategory) return false;
+  /* ---------------------------------------------
+     RESET PAGINATION WHEN FILTERS / TAB CHANGE
+  --------------------------------------------- */
+  useEffect(() => {
+    const initialCounts = {};
+    allItems.forEach(item => {
+      if (!initialCounts[item.category]) {
+        initialCounts[item.category] = 8;
+      }
+    });
+    setVisibleCountPerCategory(initialCounts);
+  }, [selectedCategory, filterJain, filterSpicy]);
+
+  /* ---------------------------------------------
+     SCROLL TO TOP ON TAB / FILTER CHANGE
+  --------------------------------------------- */
+  useEffect(() => {
+    topRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, [selectedCategory, filterJain, filterSpicy]);
+
+  /* ---------------------------------------------
+     FILTER ITEMS
+  --------------------------------------------- */
+  const filteredItems = allItems.filter(item => {
+    if (selectedCategory !== 'all' && item.category !== selectedCategory)
+      return false;
     if (filterJain && !item.isJain) return false;
     if (filterSpicy && item.spiceLevel === 0) return false;
     return true;
   });
 
-  const categories = ['all', ...new Set(allItems.map((item) => item.category))];
+  const categories = ['all', ...new Set(allItems.map(i => i.category))];
 
-  const loadMoreItems = (categoryName) => {
-    setVisibleCountPerCategory((prev) => ({
+  const loadMoreItems = categoryName => {
+    setVisibleCountPerCategory(prev => ({
       ...prev,
       [categoryName]: (prev[categoryName] || 8) + 8,
     }));
   };
 
   return (
-    <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
-      {/* Hero Section */}
+    <div className="bg-primary-dark min-h-screen pt-24 pb-16">
+      {/* Hero */}
       <section className="py-16 px-4 bg-primary">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -40,139 +69,112 @@ const MenuPage = () => {
           transition={{ duration: 0.8 }}
           className="max-w-7xl mx-auto text-center"
         >
-          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl text-secondary mb-6">
+          <h1 className="font-heading text-6xl text-secondary mb-6">
             Our Menu
           </h1>
-          <p className="font-body text-lg text-secondary/80 max-w-2xl mx-auto">
-            A curated selection of global cuisines, thoughtfully prepared with pure vegetarian ingredients
+          <p className="text-secondary/80 max-w-2xl mx-auto">
+            A curated selection of global vegetarian cuisines
           </p>
-          <div className="w-24 h-1 bg-accent mx-auto mt-8" />
         </motion.div>
       </section>
 
       {/* Filters */}
-      <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-40">
+      <section className="sticky top-16 z-40 bg-primary-dark/95 backdrop-blur-md py-3">
         <div className="max-w-7xl mx-auto">
-          {/* Category Filters - Single Line Scrollable */}
-          <div className="relative">
-            <div className="overflow-x-auto pb-2 mb-4 scrollbar-hide scroll-smooth">
-              <div className="flex gap-2 min-w-max justify-start md:justify-center px-2">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`px-3 py-2 rounded-sm font-body text-sm whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
-                      selectedCategory === category
-                        ? 'bg-accent text-primary-dark shadow-lg shadow-accent/30'
-                        : 'bg-primary text-secondary/80 hover:bg-primary-light hover:text-secondary'
-                    }`}
-                    data-testid={`filter-${category}`}
-                  >
-                    {category === 'all' ? 'All Dishes' : category}
-                  </button>
-                ))}
-              </div>
+          <div className="overflow-x-auto scrollbar-hide mb-4">
+            <div className="flex gap-2 px-2 min-w-max">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-3 py-2 rounded-sm text-sm transition ${
+                    selectedCategory === category
+                      ? 'bg-accent text-primary-dark'
+                      : 'bg-primary text-secondary/80 hover:bg-primary-light'
+                  }`}
+                >
+                  {category === 'all' ? 'All Dishes' : category}
+                </button>
+              ))}
             </div>
-            {/* Scroll hint indicator */}
-            <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none md:hidden" />
           </div>
 
-          {/* Additional Filters */}
-          <div className="flex flex-wrap gap-3 justify-center">
-            <label className="flex items-center space-x-2 cursor-pointer group">
+          <div className="flex justify-center gap-4">
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={filterJain}
-                onChange={(e) => setFilterJain(e.target.checked)}
-                className="w-4 h-4 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
-                data-testid="filter-jain"
+                onChange={e => setFilterJain(e.target.checked)}
               />
-              <span className="font-body text-sm text-secondary/80 group-hover:text-accent transition-colors">
-                Jain Only
-              </span>
+              Jain Only
             </label>
 
-            <label className="flex items-center space-x-2 cursor-pointer group">
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={filterSpicy}
-                onChange={(e) => setFilterSpicy(e.target.checked)}
-                className="w-4 h-4 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
-                data-testid="filter-spicy"
+                onChange={e => setFilterSpicy(e.target.checked)}
               />
-              <span className="font-body text-sm text-secondary/80 group-hover:text-accent transition-colors">
-                Spicy <Flame className="inline" size={14} />
-              </span>
+              Spicy <Flame size={14} />
             </label>
           </div>
         </div>
       </section>
 
-      {/* Menu Items */}
-      <section ref={ref} className="py-12 px-4">
+      {/* Menu */}
+      <section ref={topRef} className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
           {filteredItems.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
-              <p className="font-body text-xl text-secondary/70">
-                No items match your filters. Try adjusting your selection.
-              </p>
-            </motion.div>
+            <p className="text-center text-secondary/70 py-20">
+              No items match your filters.
+            </p>
           ) : (
             <div className="space-y-16">
-              {/* Group by category */}
               {categories
-                .filter((cat) => cat !== 'all')
-                .map((categoryName) => {
+                .filter(cat => cat !== 'all')
+                .map(categoryName => {
                   const categoryItems = filteredItems.filter(
-                    (item) => item.category === categoryName
+                    item => item.category === categoryName
                   );
-                  if (categoryItems.length === 0) return null;
+                  if (!categoryItems.length) return null;
 
-                  const visibleCount = visibleCountPerCategory[categoryName] || 8;
-                  const displayedItems = categoryItems.slice(0, visibleCount);
-                  const hasMore = categoryItems.length > visibleCount;
+                  const visible =
+                    visibleCountPerCategory[categoryName] || 8;
+                  const hasMore = categoryItems.length > visible;
 
                   return (
-                    <div key={categoryName} data-testid={`category-${categoryName}`}>
-                      {/* Category Header */}
-                      <motion.div
+                    <div key={categoryName}>
+                      <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.6 }}
-                        className="mb-8"
+                        className="text-4xl text-accent mb-6"
                       >
-                        <h2 className="font-heading text-4xl lg:text-5xl text-accent mb-2">
-                          {categoryName}
-                        </h2>
-                        <div className="w-16 h-0.5 bg-accent/50" />
-                      </motion.div>
+                        {categoryName}
+                      </motion.h2>
 
-                      {/* Items Grid */}
                       <div className="space-y-6">
-                        {displayedItems.map((item, index) => (
-                          <MenuItem
-                            key={item.id}
-                            item={item}
-                            index={index}
-                            inView={inView}
-                            onImageClick={() => setSelectedImage(item.image)}
-                          />
-                        ))}
+                        {categoryItems
+                          .slice(0, visible)
+                          .map((item, index) => (
+                            <MenuItem
+                              key={item.id}
+                              item={item}
+                              index={index}
+                              inView={inView}
+                              onImageClick={() =>
+                                setSelectedImage(item.image)
+                              }
+                            />
+                          ))}
                       </div>
 
-                      {/* Load More Button */}
                       {hasMore && (
                         <div className="text-center mt-8">
                           <button
                             onClick={() => loadMoreItems(categoryName)}
-                            className="px-8 py-3 bg-accent hover:bg-accent-dark text-primary-dark font-body font-medium rounded-sm transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
-                            data-testid={`load-more-${categoryName}`}
+                            className="px-8 py-3 bg-accent text-primary-dark rounded-sm"
                           >
-                            Load More Items
+                            Load More
                           </button>
                         </div>
                       )}
@@ -184,117 +186,69 @@ const MenuPage = () => {
         </div>
       </section>
 
-      {/* Image Modal */}
       <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />
     </div>
   );
 };
 
-// Menu Item Component
-const MenuItem = ({ item, index, inView, onImageClick }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="bg-primary/40 backdrop-blur-sm rounded-sm border border-accent/20 overflow-hidden hover:border-accent/40 transition-all duration-500 group"
-      data-testid={`menu-item-${item.id}`}
+/* ---------------- MENU ITEM ---------------- */
+
+const MenuItem = ({ item, index, inView, onImageClick }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={inView ? { opacity: 1, y: 0 } : {}}
+    transition={{ delay: index * 0.05 }}
+    className="bg-primary/40 border border-accent/20 rounded-sm overflow-hidden flex"
+  >
+    <div className="flex-1 p-6">
+      <h3 className="text-2xl text-secondary mb-2">{item.name}</h3>
+      <p className="text-secondary/80 mb-4">{item.description}</p>
+      <span className="text-accent text-2xl">₹{item.price}</span>
+    </div>
+
+    <div
+      className="w-40 h-40 cursor-pointer"
+      onClick={onImageClick}
     >
-      <div className="flex flex-row">
-        {/* Content */}
-        <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center min-w-0">
-          <div className="flex items-start justify-between mb-3 flex-wrap gap-2">
-            <h3 className="font-heading text-2xl lg:text-3xl text-secondary group-hover:text-accent transition-colors duration-300">
-              {item.name}
-            </h3>
-            <div className="flex items-center space-x-2">
-              {item.isJain && (
-                <span className="px-3 py-1 bg-accent/20 text-accent text-xs font-body rounded-sm border border-accent/40">
-                  JAIN
-                </span>
-              )}
-              {item.spiceLevel > 0 && (
-                <div className="flex">
-                  {[...Array(item.spiceLevel)].map((_, i) => (
-                    <Flame
-                      key={i}
-                      size={16}
-                      className="text-accent fill-accent"
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+      <img
+        src={item.image}
+        alt={item.name}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </motion.div>
+);
 
-          <p className="font-body text-secondary/80 mb-4 leading-relaxed">
-            {item.description}
-          </p>
+/* ---------------- IMAGE MODAL ---------------- */
 
-          <div className="flex items-center justify-between mt-auto">
-            <span className="font-heading text-3xl text-accent">
-              ₹{item.price}
-            </span>
-          </div>
-        </div>
-
-        {/* Image - Fixed size, always on right side */}
-        <div
-          className="w-32 sm:w-40 md:w-48 h-32 sm:h-40 md:h-48 flex-shrink-0 cursor-pointer overflow-hidden"
-          onClick={onImageClick}
-          data-testid={`menu-item-image-${item.id}`}
-        >
-          <img
-            src={item.image}
-            alt={item.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Image Modal Component
-const ImageModal = ({ image, onClose }) => {
-  return (
-    <AnimatePresence>
-      {image && (
+const ImageModal = ({ image, onClose }) => (
+  <AnimatePresence>
+    {image && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+        onClick={onClose}
+      >
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={onClose}
-          data-testid="image-modal"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0.8 }}
+          onClick={e => e.stopPropagation()}
+          className="relative max-w-4xl"
         >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="relative max-w-4xl w-full"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            onClick={onClose}
+            className="absolute -top-12 right-0 text-white"
           >
-            <button
-              onClick={onClose}
-              className="absolute -top-12 right-0 text-secondary hover:text-accent transition-colors p-2"
-              data-testid="close-modal-btn"
-              aria-label="Close modal"
-            >
-              <X size={32} />
-            </button>
-            <img
-              src={image}
-              alt="Dish"
-              className="w-full h-auto rounded-sm shadow-2xl"
-            />
-          </motion.div>
+            <X size={32} />
+          </button>
+          <img src={image} alt="Dish" className="rounded-sm" />
         </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
 
 export default MenuPage;
