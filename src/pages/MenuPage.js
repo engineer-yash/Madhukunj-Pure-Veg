@@ -61,7 +61,7 @@ const MenuPage = () => {
 
       {/* Filters */}
       <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-30">
-        <div id="filters-section" className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
           <div className="relative">
             <div className="overflow-x-auto pb-2 mb-4 scrollbar-hide scroll-smooth">
@@ -118,7 +118,7 @@ const MenuPage = () => {
       </section>
 
       {/* Menu Items */}
-      <section ref={ref} className="py-12 px-4">
+      <section id="filters-section" ref={ref} className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
           {filteredItems.length === 0 ? (
             <motion.div
