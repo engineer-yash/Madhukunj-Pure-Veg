@@ -60,7 +60,7 @@ const MenuPage = () => {
       </section>
 
       {/* Filters */}
-      <section id="filters-section" className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-30">
+      <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-30">
         <div className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
           <div className="relative">
@@ -189,7 +189,7 @@ const MenuPage = () => {
                     const hasMore = categoryItems.length > visibleCount;
 
                     return (
-                      <div key={categoryName} data-testid={`category-${categoryName}`}>
+                      <div id="filters-section" key={categoryName} data-testid={`category-${categoryName}`}>
                         {/* Category Header */}
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
