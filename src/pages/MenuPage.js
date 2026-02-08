@@ -11,6 +11,8 @@ const MenuPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [visibleCountPerCategory, setVisibleCountPerCategory] = useState({ all: 8 });
+  const [visitedTabs, setVisitedTabs] = useState(new Set(['all'])); // Track visited tabs
+  const [scrollPositions, setScrollPositions] = useState({}); // Track scroll positions per tab
 
   const allItems = getAllMenuItems();
 
@@ -30,10 +32,62 @@ const MenuPage = () => {
     }));
   };
 
-  // Scroll to top when category changes
+  // Scroll to category header section
+  const scrollToCategoryHeader = () => {
+    const filtersSection = document.getElementById('filters-section');
+    if (filtersSection) {
+      const offset = 120; // Adjust for sticky header
+      const elementPosition = filtersSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
+  // Save current scroll position before changing tab
+  const saveScrollPosition = (category) => {
+    setScrollPositions(prev => ({
+      ...prev,
+      [category]: window.pageYOffset
+    }));
+  };
+
+  // Restore scroll position for a tab
+  const restoreScrollPosition = (category) => {
+    const savedPosition = scrollPositions[category];
+    if (savedPosition !== undefined) {
+      setTimeout(() => {
+        window.scrollTo({ top: savedPosition, behavior: 'instant' });
+      }, 0);
+    }
+  };
+
+  // Handle category change with visited tracking
   const handleCategoryChange = (category) => {
+    // Save current scroll position
+    saveScrollPosition(selectedCategory);
+    
     setSelectedCategory(category);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Check if this tab has been visited before
+    if (!visitedTabs.has(category)) {
+      // First time visit - scroll to category header
+      setVisitedTabs(prev => new Set([...prev, category]));
+      setTimeout(() => scrollToCategoryHeader(), 100);
+    } else {
+      // Revisit - restore last scroll position
+      restoreScrollPosition(category);
+    }
+  };
+
+  // Handle filter changes - always scroll to top
+  const handleFilterChange = (filterType, value) => {
+    if (filterType === 'jain') {
+      setFilterJain(value);
+    } else if (filterType === 'spicy') {
+      setFilterSpicy(value);
+    }
+    // Scroll to category header when filters change
+    setTimeout(() => scrollToCategoryHeader(), 100);
   };
 
   return (
@@ -61,9 +115,9 @@ const MenuPage = () => {
         <div className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
           <div className="relative">
-            <div className="overflow-x-auto pb-2 mb-4 scrollbar-hide scroll-smooth">
+            <div className="overflow-x-auto pb-2 mb-4 scrollbar-hide scroll-smooth" id="category-tabs-container">
               <div className="flex gap-2 min-w-max justify-start md:justify-center px-2">
-                {categories.map((category) => (
+                {categories.map((category, index) => (
                   <button
                     key={category}
                     onClick={() => handleCategoryChange(category)}
@@ -73,14 +127,15 @@ const MenuPage = () => {
                         : 'bg-primary text-secondary/80 hover:bg-primary-light hover:text-secondary'
                     }`}
                     data-testid={`filter-${category}`}
+                    data-tab-index={index}
                   >
                     {category === 'all' ? 'All Dishes' : category}
                   </button>
                 ))}
               </div>
             </div>
-            {/* Scroll hint indicator */}
-            <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none md:hidden" />
+            {/* Scroll hint indicator - shown for both mobile and web when scrollable */}
+            <ScrollHintIndicator categories={categories} />
           </div>
 
           {/* Additional Filters */}
@@ -89,7 +144,7 @@ const MenuPage = () => {
               <input
                 type="checkbox"
                 checked={filterJain}
-                onChange={(e) => setFilterJain(e.target.checked)}
+                onChange={(e) => handleFilterChange('jain', e.target.checked)}
                 className="w-4 h-4 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
                 data-testid="filter-jain"
               />
@@ -102,7 +157,7 @@ const MenuPage = () => {
               <input
                 type="checkbox"
                 checked={filterSpicy}
-                onChange={(e) => setFilterSpicy(e.target.checked)}
+                onChange={(e) => handleFilterChange('spicy', e.target.checked)}
                 className="w-4 h-4 rounded border-accent/50 bg-primary text-accent focus:ring-accent focus:ring-offset-0"
                 data-testid="filter-spicy"
               />
@@ -237,6 +292,40 @@ const MenuPage = () => {
       {/* Image Modal */}
       <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />
     </div>
+  );
+};
+
+// Scroll Hint Indicator Component for Category Tabs
+const ScrollHintIndicator = ({ categories }) => {
+  const [showRightShadow, setShowRightShadow] = React.useState(true);
+  
+  React.useEffect(() => {
+    const container = document.getElementById('category-tabs-container');
+    if (!container) return;
+
+    const handleScroll = () => {
+      const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
+      setShowRightShadow(!isAtEnd);
+    };
+
+    // Check initially
+    handleScroll();
+
+    container.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [categories]);
+
+  return (
+    <>
+      {showRightShadow && (
+        <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none" />
+      )}
+    </>
   );
 };
 
