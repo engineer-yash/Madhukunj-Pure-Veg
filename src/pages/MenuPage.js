@@ -32,15 +32,18 @@ const MenuPage = () => {
     }));
   };
 
-  // Scroll to category header section
+  // Scroll to category header section - show header name at top
   const scrollToCategoryHeader = () => {
-    const categoryHeader = document.getElementById('category-header');
-    if (categoryHeader) {
-      const offset = 150; // Adjust for sticky header + some padding
-      const elementPosition = categoryHeader.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
+    setTimeout(() => {
+      const categoryHeader = document.getElementById('category-header');
+      if (categoryHeader) {
+        // Calculate the position to place category header just below sticky filters
+        const stickyHeaderHeight = 180; // Height of navbar + filter section
+        const elementPosition = categoryHeader.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - stickyHeaderHeight;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    }, 50);
   };
 
   // Save current scroll position before changing tab
@@ -72,7 +75,7 @@ const MenuPage = () => {
     if (!visitedTabs.has(category)) {
       // First time visit - scroll to category header
       setVisitedTabs(prev => new Set([...prev, category]));
-      setTimeout(() => scrollToCategoryHeader(), 100);
+      setTimeout(() => scrollToCategoryHeader(), 150);
     } else {
       // Revisit - restore last scroll position
       restoreScrollPosition(category);
@@ -87,7 +90,7 @@ const MenuPage = () => {
       setFilterSpicy(value);
     }
     // Scroll to category header when filters change
-    setTimeout(() => scrollToCategoryHeader(), 100);
+    setTimeout(() => scrollToCategoryHeader(), 150);
   };
 
   return (
