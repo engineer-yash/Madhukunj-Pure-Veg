@@ -42,7 +42,7 @@ const ContactInfoSection = () => {
     {
       icon: <MapPin size={28} />,
       title: 'Location',
-      content: 'Shivneri Path, Below Hotel Nandanvan,\n Adarsh Nagar Society, Parsanees Colony,\n Gultekadi, Pune, Maharashtra, 411037',
+      content: 'Pune, Maharashtra, India',
       link: 'https://maps.app.goo.gl/jvxPXw5eJUa59d7w5'
     },
     {
