@@ -641,9 +641,11 @@ const MadhukunjExperience = () => {
             <p>
               At Madhukunj, dining transcends nourishment. It becomes a meditation, a celebration of life's simple pleasures elevated to art.
             </p>
-            Our philosophy is rooted in <span className="text-accent font-medium">purity</span> of ingredients, of intention, of experience. Every dish honors the vegetarian tradition while embracing global flavors.
             <p>
-              We honor <span className="text-accent font-medium">Jain dietary principles</span>, ensuring every guest finds comfort and joy in our offerings.
+              Our philosophy is rooted in <span className="text-accent font-medium">purity</span> of ingredients, of intention, of experience. Every dish honors the vegetarian tradition while embracing global flavors - from authentic <span className="text-accent font-medium">South Indian</span> delicacies to exotic <span className="text-accent font-medium">Oriental</span> creations, from classic <span className="text-accent font-medium">Indian Main Course</span> to refined <span className="text-accent font-medium">World Cuisine</span>.
+            </p>
+            <p>
+              We honor <span className="text-accent font-medium">Jain dietary principles</span>, ensuring every guest finds comfort and joy in our offerings. Whether you crave the smoky flavors from our <span className="text-accent font-medium">Tandoor</span>, handcrafted breads, aromatic biryanis, or divine desserts, each category is crafted with equal devotion.
             </p>
             <p>
               Here, meals are savored in tranquility. Conversations flow like gentle streams. Time slows, allowing you to truly taste, to truly be.
@@ -699,7 +701,7 @@ const InstagramWall = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-4 group-hover:text-accent transition-colors">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-4 hover:text-accent transition-colors duration-300">
               @madhukunj.pune
             </h2>
           </a>
