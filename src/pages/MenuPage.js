@@ -33,7 +33,7 @@ const MenuPage = () => {
   // Scroll to top when category changes
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 20, behavior: 'smooth' });
   };
 
   return (
