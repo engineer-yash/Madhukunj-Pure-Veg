@@ -30,11 +30,14 @@ const MenuPage = () => {
     }));
   };
 
-  // Scroll to top when category changes
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    window.scrollTo({ top: 20, behavior: 'smooth' });
-  };
+  // Scroll to Filters section when category changes
+    const handleCategoryChange = (category) => {
+      setSelectedCategory(category);
+      const filtersSection = document.getElementById('filters-section');
+      if (filtersSection) {
+        filtersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
 
   return (
     <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
@@ -57,7 +60,7 @@ const MenuPage = () => {
       </section>
 
       {/* Filters */}
-      <section className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-30">
+      <section id="filters-section" className="py-3 px-4 bg-primary-dark/95 backdrop-blur-md shadow-lg sticky top-16 lg:top-20 z-30">
         <div className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
           <div className="relative">
