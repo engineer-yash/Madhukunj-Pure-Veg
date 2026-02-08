@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo
+} from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { X, Flame } from 'lucide-react';
@@ -11,23 +16,28 @@ const MenuPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [visibleCountPerCategory, setVisibleCountPerCategory] = useState({});
 
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const topRef = useRef(null);
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  const allItems = getAllMenuItems();
+  /* ---------------------------------------------
+     MEMOIZED MENU DATA (FIXES ESLINT WARNING)
+  --------------------------------------------- */
+  const allItems = useMemo(() => getAllMenuItems(), []);
 
   /* ---------------------------------------------
      RESET PAGINATION WHEN FILTERS / TAB CHANGE
   --------------------------------------------- */
   useEffect(() => {
     const initialCounts = {};
+
     allItems.forEach(item => {
       if (!initialCounts[item.category]) {
         initialCounts[item.category] = 8;
       }
     });
+
     setVisibleCountPerCategory(initialCounts);
-  }, [selectedCategory, filterJain, filterSpicy]);
+  }, [allItems, selectedCategory, filterJain, filterSpicy]);
 
   /* ---------------------------------------------
      SCROLL TO TOP ON TAB / FILTER CHANGE
@@ -40,17 +50,22 @@ const MenuPage = () => {
   }, [selectedCategory, filterJain, filterSpicy]);
 
   /* ---------------------------------------------
-     FILTER ITEMS
+     FILTERED ITEMS
   --------------------------------------------- */
-  const filteredItems = allItems.filter(item => {
-    if (selectedCategory !== 'all' && item.category !== selectedCategory)
-      return false;
-    if (filterJain && !item.isJain) return false;
-    if (filterSpicy && item.spiceLevel === 0) return false;
-    return true;
-  });
+  const filteredItems = useMemo(() => {
+    return allItems.filter(item => {
+      if (selectedCategory !== 'all' && item.category !== selectedCategory)
+        return false;
+      if (filterJain && !item.isJain) return false;
+      if (filterSpicy && item.spiceLevel === 0) return false;
+      return true;
+    });
+  }, [allItems, selectedCategory, filterJain, filterSpicy]);
 
-  const categories = ['all', ...new Set(allItems.map(i => i.category))];
+  const categories = useMemo(
+    () => ['all', ...new Set(allItems.map(item => item.category))],
+    [allItems]
+  );
 
   const loadMoreItems = categoryName => {
     setVisibleCountPerCategory(prev => ({
@@ -58,6 +73,9 @@ const MenuPage = () => {
       [categoryName]: (prev[categoryName] || 8) + 8,
     }));
   };
+
+  // ⬇️ JSX return starts BELOW this line
+
 
   return (
     <div className="bg-primary-dark min-h-screen pt-24 pb-16">
