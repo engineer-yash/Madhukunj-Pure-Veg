@@ -34,10 +34,10 @@ const MenuPage = () => {
 
   // Scroll to category header section
   const scrollToCategoryHeader = () => {
-    const filtersSection = document.getElementById('filters-section');
-    if (filtersSection) {
-      const offset = 120; // Adjust for sticky header
-      const elementPosition = filtersSection.getBoundingClientRect().top;
+    const categoryHeader = document.getElementById('category-header');
+    if (categoryHeader) {
+      const offset = 150; // Adjust for sticky header + some padding
+      const elementPosition = categoryHeader.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
@@ -189,6 +189,7 @@ const MenuPage = () => {
                 <div data-testid="category-all">
                   {/* Category Header */}
                   <motion.div
+                    id="category-header"
                     initial={{ opacity: 0, y: 20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
@@ -244,6 +245,7 @@ const MenuPage = () => {
                       <div key={categoryName} data-testid={`category-${categoryName}`}>
                         {/* Category Header */}
                         <motion.div
+                          id="category-header"
                           initial={{ opacity: 0, y: 20 }}
                           animate={inView ? { opacity: 1, y: 0 } : {}}
                           transition={{ duration: 0.6 }}
