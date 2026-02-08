@@ -30,14 +30,11 @@ const MenuPage = () => {
     }));
   };
 
-  // Scroll to Filters section when category changes
-    const handleCategoryChange = (category) => {
-      setSelectedCategory(category);
-      const filtersSection = document.getElementById('filters-section');
-      if (filtersSection) {
-        filtersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    };
+  // Scroll to top when category changes
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="menu-page">
@@ -118,7 +115,7 @@ const MenuPage = () => {
       </section>
 
       {/* Menu Items */}
-      <section id="filters-section" ref={ref} className="py-12 px-4">
+      <section ref={ref} className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
           {filteredItems.length === 0 ? (
             <motion.div
@@ -142,7 +139,7 @@ const MenuPage = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-8"
                   >
-                    <h2 className="font-heading text-4xl lg:text-5xl text-accent mb-2">
+                    <h2 id="filters-section" className="font-heading text-4xl lg:text-5xl text-accent mb-2">
                       All Dishes
                     </h2>
                     <div className="w-16 h-0.5 bg-accent/50" />
