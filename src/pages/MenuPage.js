@@ -128,7 +128,7 @@ const MenuPage = () => {
               </p>
             </motion.div>
           ) : (
-            <div className="space-y-16">
+            <div id="filters-section" className="space-y-16">
               {/* If "All Dishes" is selected, show all items together */}
               {selectedCategory === 'all' ? (
                 <div data-testid="category-all">
@@ -139,7 +139,7 @@ const MenuPage = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-8"
                   >
-                    <h2 id="filters-section" className="font-heading text-4xl lg:text-5xl text-accent mb-2">
+                    <h2  className="font-heading text-4xl lg:text-5xl text-accent mb-2">
                       All Dishes
                     </h2>
                     <div className="w-16 h-0.5 bg-accent/50" />
