@@ -46,8 +46,8 @@ const ContactInfoSection = () => {
           <div className="space-y-6">
             {/* Phone Numbers Card */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: -30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
               className="bg-primary/40 backdrop-blur-sm p-8 rounded-sm border border-accent/20 hover:border-accent/40 transition-all duration-500"
               data-testid="contact-card-phones"
@@ -90,8 +90,8 @@ const ContactInfoSection = () => {
 
             {/* Social & Hours Card */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: -30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-primary/40 backdrop-blur-sm p-8 rounded-sm border border-accent/20 hover:border-accent/40 transition-all duration-500"
               data-testid="contact-card-social"
@@ -134,8 +134,8 @@ const ContactInfoSection = () => {
 
           {/* Right Column - Location */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="bg-primary/40 backdrop-blur-sm p-8 rounded-sm border border-accent/20 hover:border-accent/40 transition-all duration-500"
             data-testid="contact-card-location"
@@ -283,7 +283,7 @@ const ContactFormSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="bg-primary/40 backdrop-blur-sm p-8 lg:p-12 rounded-sm border border-accent/20"
+          className="bg-primary-dark/40 backdrop-blur-sm p-8 lg:p-12 rounded-sm border border-accent/20"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -296,7 +296,7 @@ const ContactFormSection = () => {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-primary-dark border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-primary border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors"
                   placeholder="John Doe"
                   data-testid="contact-name-input"
                 />
@@ -311,7 +311,7 @@ const ContactFormSection = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-primary-dark border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-primary border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors"
                   placeholder="john@example.com"
                   data-testid="contact-email-input"
                 />
@@ -326,7 +326,7 @@ const ContactFormSection = () => {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-3 bg-primary-dark border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors"
+                className="w-full px-4 py-3 bg-primary border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors"
                 placeholder="+91 XXXXX XXXXX"
                 data-testid="contact-phone-input"
               />
@@ -341,7 +341,7 @@ const ContactFormSection = () => {
                 rows="6"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full px-4 py-3 bg-primary-dark border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors resize-none"
+                className="w-full px-4 py-3 bg-primary border border-accent/30 rounded-sm text-secondary focus:border-accent focus:outline-none transition-colors resize-none"
                 placeholder="Tell us how we can help you..."
                 data-testid="contact-message-input"
               />
