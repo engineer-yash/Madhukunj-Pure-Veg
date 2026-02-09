@@ -118,7 +118,7 @@ const MenuPage = () => {
         <div className="max-w-7xl mx-auto">
           {/* Category Filters - Single Line Scrollable */}
           <div className="relative">
-            <div className="overflow-x-auto pb-2 mb-4 scrollbar-hide scroll-smooth" id="category-tabs-container">
+            <div className="overflow-x-auto mb-2 scrollbar-hide scroll-smooth" id="category-tabs-container">
               <div className="flex gap-2 min-w-max justify-start md:justify-center px-2">
                 {categories.map((category, index) => (
                   <button
