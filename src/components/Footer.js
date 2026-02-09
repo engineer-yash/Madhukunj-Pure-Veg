@@ -13,10 +13,10 @@ const Footer = () => {
   ];
 
   const menuCategories = [
-    { name: 'South Indian', path: '/menu?category=South Indian' },
-    { name: 'Indian Main Course', path: '/menu?category=Indian Main Course' },
-    { name: 'Starters', path: '/menu?category=Starters - Continental' },
-    { name: 'World Cuisine', path: '/menu?category=World Cuisine' },
+    { name: 'South Indian', path: '/menu?category=South%20Indian' },
+    { name: 'Indian Main Course', path: '/menu?category=Indian%20Main%20Course' },
+    { name: 'Starters', path: '/menu?category=Starters%20-%20Continental' },
+    { name: 'World Cuisine', path: '/menu?category=World%20Cuisine' },
     { name: 'Desserts', path: '/menu?category=Desserts' }
   ];
 
