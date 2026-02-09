@@ -103,7 +103,7 @@ const KrishnaInspirationSection = () => {
             <Sparkles className="text-accent" size={40} />
           </div>
           <h2 className="font-heading text-4xl sm:text-5xl text-secondary mb-4">
-            Inspired by Krishna
+            Inspired by Lord Krishna
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto" />
         </motion.div>
@@ -140,7 +140,7 @@ const KrishnaInspirationSection = () => {
             </div>
             <h3 className="font-heading text-2xl text-accent">Joy & Celebration</h3>
             <p className="font-body text-secondary/80 leading-relaxed">
-              Just as Krishna's flute brought joy, our cuisine creates moments of celebration and togetherness.
+              Just as Lord Krishna's flute brought joy, our cuisine creates moments of celebration and togetherness.
             </p>
           </div>
         </motion.div>
@@ -152,7 +152,7 @@ const KrishnaInspirationSection = () => {
           className="mt-16 text-center"
         >
           <p className="font-body text-xl text-secondary/90 italic max-w-3xl mx-auto leading-relaxed">
-            "Just as the peacock feather adorns Krishna's crown and the flute creates divine melodies, 
+            "Just as the peacock feather adorns Lord Krishna's crown and the flute creates divine melodies, 
             our restaurant weaves tradition and innovation into an experience that transcends the ordinary."
           </p>
         </motion.div>
