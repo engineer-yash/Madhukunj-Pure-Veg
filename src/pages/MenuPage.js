@@ -440,5 +440,4 @@ const ImageModal = ({ image, onClose }) => {
     </AnimatePresence>
   );
 };
-
 export default MenuPage;
