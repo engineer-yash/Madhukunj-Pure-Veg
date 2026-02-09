@@ -107,7 +107,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.5 }}
-        className="absolute left-0 top-0 h-full w-1/4 hidden md:block"
+        className="absolute left-0 top-0 h-full w-1/4 hidden sm:block"
         style={{ zIndex: 1 }}
       >
         <img
@@ -122,7 +122,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, delay: 0.7 }}
-        className="absolute right-0 bottom-0 h-[60%] w-auto hidden md:block pointer-events-none"
+        className="absolute right-0 bottom-0 h-[60%] w-auto hidden sm:block pointer-events-none"
         style={{ zIndex: 2 }}
       >
         <img
