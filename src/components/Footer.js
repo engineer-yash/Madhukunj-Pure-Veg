@@ -14,7 +14,7 @@ const Footer = () => {
 
   const menuCategories = [
     { name: 'South Indian', path: '/menu?category=South%20Indian' },
-    { name: 'Indian Main Course', path: '/menu?category=Indian%20Main%20Course' },
+    { name: 'Main Course', path: '/menu?category=Indian%20Main%20Course' },
     { name: 'Starters', path: '/menu?category=Starters%20-%20Continental' },
     { name: 'World Cuisine', path: '/menu?category=World%20Cuisine' },
     { name: 'Desserts', path: '/menu?category=Desserts' }
@@ -36,7 +36,7 @@ const Footer = () => {
               <img
                 src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770476273/Madhukunj_zpiozn.png"
                 alt="Madhukunj - Pure Veg"
-                className="h-16 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
             <p className="text-secondary/80 font-body text-sm leading-relaxed mb-4">
