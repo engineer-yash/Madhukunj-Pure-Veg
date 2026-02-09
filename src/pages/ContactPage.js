@@ -8,7 +8,7 @@ const ContactPage = () => {
     <div className="bg-primary-dark min-h-screen pt-24 pb-16" data-testid="contact-page">
       <HeroSection />
       <ContactInfoSection />
-      <MapSection />
+      {/* <MapSection /> */}
       <ContactFormSection />
     </div>
   );
