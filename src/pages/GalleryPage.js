@@ -40,28 +40,28 @@ const RestaurantGallery = () => {
 
   const galleryImages = [
     {
-      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/zxucu0pq_Madhukunj.png',
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629283/madhukunj.pune-20260209-0009_xktevr.jpg',
       title: 'Interior Ambiance'
     },
     {
-      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/q8pj6rgu_madhukunj.pune-20260207-0001.jpg',
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629281/madhukunj.pune-20260209-0002_zneiok.jpg',
       title: 'Culinary Art'
     },
     {
-      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/adw7trha_madhukunj.pune-20260207-0002.jpg',
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629281/madhukunj.pune-20260209-0001_iw3jd4.jpg',
+      title: 'Our Main Contribution'
+    },
+    {
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629282/madhukunj.pune-20260209-0012_r09cnl.jpg',
+      title: 'Grand Opening Day'
+    },
+    {
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443383/madhukunj.pune-20260207-0002_okxx4o.jpg',
       title: 'World Cuisine'
     },
     {
-      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/2f88x19l_madhukunj.pune-20260207-0003.jpg',
-      title: 'French Toast'
-    },
-    {
-      url: 'https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/9hwy4phx_madhukunj.pune-20260207-0004.jpg',
-      title: 'Taste of Perfection'
-    },
-    {
-      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443381/madhukunj.pune-20260207-0003_gqylj6.jpg',
-      title: 'Signature Dish'
+      url: 'https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629283/madhukunj.pune-20260209-0007_otgcwe.jpg',
+      title: '1 Year Anniversary Celebration'
     }
   ];
 

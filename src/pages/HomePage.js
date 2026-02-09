@@ -755,7 +755,7 @@ const MadhukunjExperience = () => {
           >
             <div className="aspect-square rounded-sm overflow-hidden shadow-2xl shadow-accent/20">
               <img
-                src="https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/zxucu0pq_Madhukunj.png"
+                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629284/madhukunj.pune-20260209-0008_itjvcy.jpg"
                 alt="Madhukunj Interior"
                 className="w-full h-full object-cover"
               />
@@ -772,12 +772,12 @@ const InstagramWall = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const instagramImages = [
-    "https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/q8pj6rgu_madhukunj.pune-20260207-0001.jpg",
-    "https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/adw7trha_madhukunj.pune-20260207-0002.jpg",
-    "https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/2f88x19l_madhukunj.pune-20260207-0003.jpg",
-    "https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/9hwy4phx_madhukunj.pune-20260207-0004.jpg",
+    "https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443379/madhukunj.pune-20260207-0001_dg54ah.jpg",
+    "https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443383/madhukunj.pune-20260207-0002_okxx4o.jpg",
+    "https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629283/madhukunj.pune-20260209-0007_otgcwe.jpg",
+    "https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443373/madhukunj.pune-20260207-0004_xh0g2l.jpg",
     "https://res.cloudinary.com/dkinrfyq7/image/upload/v1770443381/madhukunj.pune-20260207-0003_gqylj6.jpg",
-    "https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/zxucu0pq_Madhukunj.png"
+    "https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629283/madhukunj.pune-20260209-0009_xktevr.jpg"
   ];
 
   return (
