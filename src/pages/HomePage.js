@@ -458,7 +458,7 @@ const KitchenPhilosophy = () => {
           </motion.div>
 
           <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl text-secondary mb-8 leading-tight">
-            From Our Kitchen Philosophy
+            From Our Kitchen
           </h2>
           
           <div className="w-32 h-1 bg-accent mx-auto mb-12" />
