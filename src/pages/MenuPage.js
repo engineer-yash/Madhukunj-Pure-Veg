@@ -355,7 +355,7 @@ const ScrollHintIndicator = ({ categories }) => {
   return (
     <>
       {showRightShadow && (
-        <div className="absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-2 h-10 w-8 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none" />
       )}
     </>
   );
