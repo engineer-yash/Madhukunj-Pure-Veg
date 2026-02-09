@@ -14,18 +14,6 @@ const MenuPage = () => {
   const [visitedTabs, setVisitedTabs] = useState(new Set(['all'])); // Track visited tabs
   const [scrollPositions, setScrollPositions] = useState({}); // Track scroll positions per tab
 
-  // Handle category from URL parameter
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const categoryParam = params.get('category');
-    if (categoryParam) {
-      setSelectedCategory(categoryParam);
-      setVisitedTabs(new Set([categoryParam]));
-      // Scroll to category header after component mounts
-      setTimeout(() => scrollToCategoryHeader(), 300);
-    }
-  }, [location.search]);
-
   const allItems = getAllMenuItems();
 
   const filteredItems = allItems.filter((item) => {
