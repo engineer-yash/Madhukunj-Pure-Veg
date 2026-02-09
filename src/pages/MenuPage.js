@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { X, Flame } from 'lucide-react';
 import { menuCategories, getAllMenuItems } from '@/data/menuData';
+import { useLocation } from 'react-router-dom';
 
 const MenuPage = () => {
+  const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filterJain, setFilterJain] = useState(false);
   const [filterSpicy, setFilterSpicy] = useState(false);
@@ -13,6 +15,29 @@ const MenuPage = () => {
   const [visibleCountPerCategory, setVisibleCountPerCategory] = useState({ all: 8 });
   const [visitedTabs, setVisitedTabs] = useState(new Set(['all'])); // Track visited tabs
   const [scrollPositions, setScrollPositions] = useState({}); // Track scroll positions per tab
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Handle category from URL parameter
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get('category');
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+      setVisitedTabs(new Set([categoryParam]));
+      // Scroll to category header after component mounts
+      setTimeout(() => scrollToCategoryHeader(), 300);
+    }
+  }, [location.search]);
 
   const allItems = getAllMenuItems();
 
@@ -212,6 +237,7 @@ const MenuPage = () => {
                         item={item}
                         index={index}
                         inView={inView}
+                        isMobile={isMobile}
                         onImageClick={() => setSelectedImage(item.image)}
                       />
                     ))}
@@ -268,6 +294,7 @@ const MenuPage = () => {
                               item={item}
                               index={index}
                               inView={inView}
+                              isMobile={isMobile}
                               onImageClick={() => setSelectedImage(item.image)}
                             />
                           ))}
@@ -328,19 +355,19 @@ const ScrollHintIndicator = ({ categories }) => {
   return (
     <>
       {showRightShadow && (
-        <div className="absolute right-0 top-0 bottom-2 w-12 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-2 w-8 bg-gradient-to-l from-primary-dark to-transparent pointer-events-none" />
       )}
     </>
   );
 };
 
 // Menu Item Component
-const MenuItem = ({ item, index, inView, onImageClick }) => {
+const MenuItem = ({ item, index, inView, isMobile, onImageClick }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial={isMobile ? {} : { opacity: 0, y: 30 }}
+      animate={isMobile ? {} : (inView ? { opacity: 1, y: 0 } : {})}
+      transition={isMobile ? {} : { duration: 0.6, delay: index * 0.1 }}
       className="bg-primary/40 backdrop-blur-sm rounded-sm border border-accent/20 overflow-hidden hover:border-accent/40 transition-all duration-500 group"
       data-testid={`menu-item-${item.id}`}
     >

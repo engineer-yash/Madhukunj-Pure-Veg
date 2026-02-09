@@ -205,6 +205,16 @@ const HeroSection = () => {
 const TodaysSpecial = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
   const scrollContainerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const specials = [
     {
@@ -256,9 +266,9 @@ const TodaysSpecial = () => {
             {specials.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                initial={isMobile ? {} : { opacity: 0, y: 40 }}
+                animate={isMobile ? {} : (inView ? { opacity: 1, y: 0 } : {})}
+                transition={isMobile ? {} : { duration: 0.8, delay: index * 0.2 }}
                 className="group cursor-pointer"
                 data-testid={`special-item-${index}`}
               >
