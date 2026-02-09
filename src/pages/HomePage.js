@@ -753,7 +753,7 @@ const MadhukunjExperience = () => {
             transition={{ duration: 1, delay: 0.5 }}
             className="relative"
           >
-            <div className="aspect-square rounded-sm overflow-hidden shadow-2xl shadow-accent/20">
+            <div className="rounded-sm overflow-hidden shadow-2xl shadow-accent/20">
               <img
                 src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629284/madhukunj.pune-20260209-0008_itjvcy.jpg"
                 alt="Madhukunj Interior"
