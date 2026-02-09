@@ -249,44 +249,76 @@ const TodaysSpecial = () => {
           <div className="w-24 h-1 bg-accent mx-auto" />
         </motion.div>
 
-        {/* Scrollable container with hint */}
+        {/* Mobile/Tablet: Grid Layout, Desktop: Scrollable */}
         <div className="relative">
-          <div 
-            ref={scrollContainerRef}
-            className="overflow-x-auto pb-4 scrollbar-hide scroll-smooth"
-            id="todays-special-scroll"
-          >
-            <div className="flex gap-8 lg:gap-12 px-2" style={{ width: 'max-content' }}>
-              {specials.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  className="group cursor-pointer flex-shrink-0 w-80"
-                  data-testid={`special-item-${index}`}
-                >
-                  <div className="relative overflow-hidden rounded-sm mb-6 aspect-square">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-                  <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-accent transition-colors duration-300">
-                    {item.name}
-                  </h3>
-                  <p className="font-body text-secondary/80 leading-relaxed">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+          {/* Grid for mobile and tablet (md and below) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:hidden">
+            {specials.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="group cursor-pointer"
+                data-testid={`special-item-${index}`}
+              >
+                <div className="relative overflow-hidden rounded-sm mb-6 aspect-square">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-accent transition-colors duration-300">
+                  {item.name}
+                </h3>
+                <p className="font-body text-secondary/80 leading-relaxed">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
-          
-          {/* Scroll hint indicators */}
-          <TodaySpecialScrollHint />
+
+          {/* Scrollable for desktop (lg and above) */}
+          <div className="hidden lg:block">
+            <div 
+              ref={scrollContainerRef}
+              className="overflow-x-auto pb-4 scrollbar-hide scroll-smooth"
+              id="todays-special-scroll"
+            >
+              <div className="flex gap-8 lg:gap-12 px-2" style={{ width: 'max-content' }}>
+                {specials.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.8, delay: index * 0.2 }}
+                    className="group cursor-pointer flex-shrink-0 w-80"
+                    data-testid={`special-item-${index}`}
+                  >
+                    <div className="relative overflow-hidden rounded-sm mb-6 aspect-square">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </div>
+                    <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-accent transition-colors duration-300">
+                      {item.name}
+                    </h3>
+                    <p className="font-body text-secondary/80 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Scroll hint indicators - only for desktop */}
+            <TodaySpecialScrollHint />
+          </div>
         </div>
       </div>
     </section>
