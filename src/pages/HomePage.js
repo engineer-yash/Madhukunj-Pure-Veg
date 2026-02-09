@@ -78,7 +78,7 @@ const HeroSection = () => {
           </video>
         ) : (
           <img
-            src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770476539/hero_section_1_2_eiu4ev.png"
+            src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770621024/hero_section_mobile_2_1_xijbfc.png"
             alt="Madhukunj Hero"
             className="absolute inset-0 w-full h-full object-cover"
             data-testid="hero-static-image"
