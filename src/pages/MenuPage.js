@@ -3,10 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { X, Flame } from 'lucide-react';
 import { menuCategories, getAllMenuItems } from '@/data/menuData';
-import { useLocation } from 'react-router-dom';
 
 const MenuPage = () => {
-  const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filterJain, setFilterJain] = useState(false);
   const [filterSpicy, setFilterSpicy] = useState(false);
@@ -349,7 +347,7 @@ const ScrollHintIndicator = ({ categories }) => {
 };
 
 // Menu Item Component
-const MenuItem = ({ item, index, inView, isMobile, onImageClick }) => {
+const MenuItem = ({ item, index, inView, onImageClick }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
