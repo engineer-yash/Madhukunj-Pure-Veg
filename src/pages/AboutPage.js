@@ -73,7 +73,7 @@ const BrandStorySection = () => {
           >
             <div className="aspect-[4/5] rounded-sm overflow-hidden shadow-2xl shadow-accent/20">
               <img
-                src="https://customer-assets.emergentagent.com/job_55f08eed-9147-471d-a01e-4ab939a34e25/artifacts/zxucu0pq_Madhukunj.png"
+                src="https://res.cloudinary.com/dkinrfyq7/image/upload/v1770629283/madhukunj.pune-20260209-0010_j8eely.jpg"
                 alt="Madhukunj Interior"
                 className="w-full h-full object-cover"
               />
