@@ -12,39 +12,6 @@ A premium, responsive restaurant website for **Madhukunj – Pure Veg**, a veget
 
 ---
 
-## About Madhukunj – Pure Veg
-
-Madhukunj is a pure vegetarian restaurant built around the philosophy of combining traditional Indian food values with international culinary experiences.
-
-The restaurant's website introduces its identity through the tagline **"Where Taste Meets Tradition"**, presenting a dining experience inspired by purity, heritage, thoughtful cooking, and global flavours.
-
-The name Madhukunj represents a garden of sweetness, inspired by the sacred gardens of Vrindavan and the cultural association with Lord Krishna.
-
-The restaurant's brand philosophy highlights:
-
-- Pure vegetarian cuisine inspired by Indian and international culinary traditions.
-- Jain-friendly food preparations and no-onion/no-garlic options.
-- Thoughtfully selected ingredients and mindful cooking.
-- A welcoming dining atmosphere that combines tradition with modern presentation.
-- A diverse menu designed to offer something for different food preferences.
-
-### Restaurant Information
-
-| Detail | Information |
-|---|---|
-| Name | Madhukunj – Pure Veg |
-| Business Category | Restaurant / Hospitality |
-| Location | Gultekadi, Pune, Maharashtra |
-| PIN Code | 411037 |
-| Address | Shivneri Path, Below Hotel Nandanvan, Adarsh Nagar Society, Parsanees Colony, Gultekadi, Pune |
-| Restaurant Contact | +91 9890004945 |
-| Online Orders | +91 9890004946 |
-| Instagram | [@madhukunj.pune](https://www.instagram.com/madhukunj.pune) |
-
-**About the owner:** The repository and published brand-story content do not identify an individual owner or founder by name. Therefore, this documentation intentionally avoids assigning ownership to an unverified individual.
-
----
-
 ## Project Overview
 
 This project was developed as a freelance engagement under **YG Web Studio**.
